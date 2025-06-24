@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Hospital;
+use App\Models\Area;
 
-class HospitalApiController extends Controller
+class AreaApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class HospitalApiController extends Controller
      */
     public function index()
     {
-        $hospitals = Hospital::all();
+        $areas = Area::all();
         return response()->json([
             'status' => 'success',
-            'data' => $hospitals
+            'data' => $areas
         ]);
     }
 
@@ -34,26 +34,26 @@ class HospitalApiController extends Controller
             'name' => 'required|string|max:255'
         ]);
 
-        $hospital = Hospital::create($request->all());
+        $area = Area::create($request->all());
         
         return response()->json([
             'status' => 'success',
-            'message' => 'Hospital created successfully',
-            'data' => $hospital
+            'message' => 'Area created successfully',
+            'data' => $area
         ], 201);
     }
 
     /**
      * Display the specified resource.
      * 
-     * @param  \App\Models\Hospital  $hospital
+     * @param  \App\Models\Area  $area
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Hospital $hospital)
+    public function show(Area $area)
     {
         return response()->json([
             'status' => 'success',
-            'data' => $hospital
+            'data' => $area
         ]);
     }
 
@@ -61,37 +61,37 @@ class HospitalApiController extends Controller
      * Update the specified resource in storage.
      * 
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hospital  $hospital
+     * @param  \App\Models\Area  $area
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Hospital $hospital)
+    public function update(Request $request, Area $area)
     {
         $request->validate([
             'name' => 'required|string|max:255'
         ]);
 
-        $hospital->update($request->all());
+        $area->update($request->all());
         
         return response()->json([
             'status' => 'success',
-            'message' => 'Hospital updated successfully',
-            'data' => $hospital
+            'message' => 'Area updated successfully',
+            'data' => $area
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      * 
-     * @param  \App\Models\Hospital  $hospital
+     * @param  \App\Models\Area  $area
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Hospital $hospital)
+    public function destroy(Area $area)
     {
-        $hospital->delete();
+        $area->delete();
         
         return response()->json([
             'status' => 'success',
-            'message' => 'Hospital deleted successfully'
+            'message' => 'Area deleted successfully'
         ]);
     }
 } 

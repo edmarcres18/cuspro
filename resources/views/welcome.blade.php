@@ -74,7 +74,7 @@
         </div>
         <h1>Welcome to MHRPCI-CusPro!</h1>
         <p>We collecting customers data.</p>
-        <a href="/login">Login</a>
+        <a href="/api-client">Login</a>
     </div>
     <script>
         
