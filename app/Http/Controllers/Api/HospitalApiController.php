@@ -95,12 +95,42 @@ class HospitalApiController extends Controller
         ]);
     }
 
-    public function getHospital()
+    /**
+     * Get all hospitals with pagination, sorting, and filtering options.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllHospitals(Request $request)
     {
-        $hospitals = Hospital::all();
+        $query = Hospital::query();
+
+        // Apply search filter if provided
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $query->where('name', 'LIKE', "%{$searchTerm}%");
+        }
+
+        // Apply sorting
+        $sortField = $request->input('sort_by', 'created_at');
+        $sortDirection = $request->input('sort_direction', 'desc');
+        $query->orderBy($sortField, $sortDirection);
+
+        // Pagination
+        $perPage = $request->input('per_page', 15);
+        $hospitals = $query->paginate($perPage);
+
         return response()->json([
             'status' => 'success',
-            'data' => $hospitals
+            'data' => $hospitals->items(),
+            'pagination' => [
+                'total' => $hospitals->total(),
+                'per_page' => $hospitals->perPage(),
+                'current_page' => $hospitals->currentPage(),
+                'last_page' => $hospitals->lastPage(),
+                'from' => $hospitals->firstItem(),
+                'to' => $hospitals->lastItem()
+            ]
         ]);
     }
 }

@@ -24,7 +24,6 @@ use App\Http\Controllers\Api\HomeApiController;
 // Public routes
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
-Route::get('/hospitals', [HospitalApiController::class, 'getHospital']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -38,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Resource routes
     Route::apiResource('areas', AreaApiController::class);
     Route::apiResource('hospitals', HospitalApiController::class);
+    Route::get('/all-hospitals', [HospitalApiController::class, 'getAllHospitals']);
     Route::apiResource('phss', PhssApiController::class);
     Route::apiResource('customers', CustomerApiController::class);
 
