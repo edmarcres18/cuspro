@@ -10,7 +10,7 @@ class HospitalApiController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -24,7 +24,7 @@ class HospitalApiController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -35,7 +35,7 @@ class HospitalApiController extends Controller
         ]);
 
         $hospital = Hospital::create($request->all());
-        
+
         return response()->json([
             'status' => 'success',
             'message' => 'Hospital created successfully',
@@ -45,7 +45,7 @@ class HospitalApiController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\JsonResponse
      */
@@ -59,7 +59,7 @@ class HospitalApiController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\JsonResponse
@@ -71,7 +71,7 @@ class HospitalApiController extends Controller
         ]);
 
         $hospital->update($request->all());
-        
+
         return response()->json([
             'status' => 'success',
             'message' => 'Hospital updated successfully',
@@ -81,17 +81,26 @@ class HospitalApiController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Hospital $hospital)
     {
         $hospital->delete();
-        
+
         return response()->json([
             'status' => 'success',
             'message' => 'Hospital deleted successfully'
         ]);
     }
-} 
+
+    public function getHospital()
+    {
+        $hospitals = Hospital::all();
+        return response()->json([
+            'status' => 'success',
+            'data' => $hospitals
+        ]);
+    }
+}
