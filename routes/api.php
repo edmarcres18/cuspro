@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\CustomerApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\HomeApiController;
+use App\Http\Controllers\Api\HospitalController;
+use App\Http\Controllers\Api\PhssController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,9 @@ use App\Http\Controllers\Api\HomeApiController;
 // Public routes
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/login', [AuthApiController::class, 'login']);
+
+Route::get('/all-hospitals', [HospitalController::class, 'index']);
+Route::get('/all-phss', [PhssController::class, 'index']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
